@@ -30,9 +30,17 @@ const Index = () => {
         {isAdmin && !isAuthenticated ? (
           <div className="bg-white rounded-lg shadow-md">
             <div className="p-6 border-b">
-              <h2 className="text-xl font-semibold text-academic-primary">
-                Administrator Login
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-academic-primary">
+                  Administrator Login
+                </h2>
+                <button
+                  onClick={() => setIsAdmin(false)}
+                  className="text-academic-primary hover:underline flex items-center gap-2"
+                >
+                  ← Back
+                </button>
+              </div>
             </div>
             <AdminLogin onLogin={() => setIsAuthenticated(true)} />
           </div>
