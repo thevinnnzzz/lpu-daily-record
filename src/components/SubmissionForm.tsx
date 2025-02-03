@@ -5,7 +5,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/components/ui/use-toast";
 
-const SubmissionForm = () => {
+interface SubmissionFormProps {
+  onSubmit: (formData: any) => void;
+}
+
+const SubmissionForm = ({ onSubmit }: SubmissionFormProps) => {
   const [userType, setUserType] = useState<"LPU" | "NON_LPU">("LPU");
   const [formData, setFormData] = useState({
     name: "",
@@ -17,6 +21,7 @@ const SubmissionForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onSubmit({ userType, ...formData });
     console.log("Form submitted:", { userType, ...formData });
     toast({
       title: "Success!",

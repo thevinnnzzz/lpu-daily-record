@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,15 +9,27 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const AdminDashboard = () => {
+interface Record {
+  id: number;
+  date: string;
+  userType: "LPU" | "NON_LPU";
+  name: string;
+  studentNumber?: string;
+  programDepartment?: string;
+  schoolName?: string;
+  thesisTitle: string;
+}
+
+interface AdminDashboardProps {
+  records: Record[];
+}
+
+const AdminDashboard = ({ records }: AdminDashboardProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [userTypeFilter, setUserTypeFilter] = useState<"ALL" | "LPU" | "NON_LPU">(
     "ALL"
   );
-
-  // Empty array for now - will be replaced with real data from database
-  const records: any[] = [];
 
   const filteredData = records.filter((record) => {
     const matchesSearch =

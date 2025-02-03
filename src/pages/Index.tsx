@@ -3,9 +3,35 @@ import AdminLogin from "@/components/AdminLogin";
 import AdminDashboard from "@/components/AdminDashboard";
 import SubmissionForm from "@/components/SubmissionForm";
 
+interface Record {
+  id: number;
+  date: string;
+  userType: "LPU" | "NON_LPU";
+  name: string;
+  studentNumber?: string;
+  programDepartment?: string;
+  schoolName?: string;
+  thesisTitle: string;
+}
+
 const Index = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [records, setRecords] = useState<Record[]>([]);
+
+  const handleSubmission = (formData: any) => {
+    const newRecord: Record = {
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      userType: formData.userType,
+      name: formData.name,
+      studentNumber: formData.studentNumber || undefined,
+      programDepartment: formData.programDepartment || undefined,
+      schoolName: formData.schoolName || undefined,
+      thesisTitle: formData.thesisTitle,
+    };
+    setRecords((prevRecords) => [...prevRecords, newRecord]);
+  };
 
   return (
     <div className="min-h-screen bg-academic-light">
@@ -60,7 +86,7 @@ const Index = () => {
                 Logout
               </button>
             </div>
-            <AdminDashboard />
+            <AdminDashboard records={records} />
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow-md">
@@ -69,7 +95,7 @@ const Index = () => {
                 Submit Research Record
               </h2>
             </div>
-            <SubmissionForm />
+            <SubmissionForm onSubmit={handleSubmission} />
           </div>
         )}
       </main>
