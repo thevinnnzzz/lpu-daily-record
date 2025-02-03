@@ -10,30 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// Mock data for demonstration
-const mockData = [
-  {
-    id: 1,
-    date: "2024-03-20",
-    userType: "LPU",
-    name: "John Doe",
-    studentNumber: "2024-0001",
-    programDepartment: "Computer Science",
-    thesisTitle: "AI in Education",
-    schoolName: null,
-  },
-  {
-    id: 2,
-    date: "2024-03-20",
-    userType: "NON_LPU",
-    name: "Jane Smith",
-    studentNumber: null,
-    programDepartment: null,
-    thesisTitle: "Climate Change Effects",
-    schoolName: "State University",
-  },
-];
-
 const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -41,10 +17,13 @@ const AdminDashboard = () => {
     "ALL"
   );
 
-  const filteredData = mockData.filter((record) => {
+  // Empty array for now - will be replaced with real data from database
+  const records: any[] = [];
+
+  const filteredData = records.filter((record) => {
     const matchesSearch =
-      record.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      record.thesisTitle.toLowerCase().includes(searchTerm.toLowerCase());
+      record.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      record.thesisTitle?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDate = dateFilter ? record.date === dateFilter : true;
     const matchesUserType =
       userTypeFilter === "ALL" ? true : record.userType === userTypeFilter;
