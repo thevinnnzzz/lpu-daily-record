@@ -9,8 +9,11 @@ const AdminLogin = ({ onLogin }: { onLogin: () => void }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For demo purposes, using hardcoded credentials
-    if (credentials.username === "admin" && credentials.password === "admin") {
+    // Using the specified credentials
+    if (
+      credentials.username === "slrc@lpuadmin2025" &&
+      credentials.password === "slrc@lpuadmin2025"
+    ) {
       onLogin();
       toast({
         title: "Welcome back!",
